@@ -32,7 +32,8 @@ jobs:
             -alias quicktodo -keyalg RSA -keysize 2048 -validity 10000 \
             -storepass quicktodo123 -keypass quicktodo123 \
             -dname "CN=QuickTodo, O=Tamanegi, L=CN"
-          apksigner sign --ks release.keystore \
+          ${ANDROID_HOME}/build-tools/$(ls ${ANDROID_HOME}/build-tools/ | tail -1)/apksigner sign \
+            --ks release.keystore \
             --ks-key-alias quicktodo \
             --ks-pass pass:quicktodo123 \
             --key-pass pass:quicktodo123 \
