@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -24,8 +26,16 @@ jobs:
       - name: Build Release APK
         run: ./gradlew assembleRelease
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+      - name: Get version
+        id: version
+        run: echo "tag=v1.0.$(date +%Y%m%d%H%M)" >> $GITHUB_OUTPUT
+
+      - name: Rename APK
+        run: mv app/build/outputs/apk/release/*.apk app/build/outputs/apk/release/QuickTodo.apk
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: quick-todo-apk
-          path: app/build/outputs/apk/release/*.apk
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: Quick Todo ${{ steps.version.outputs.tag }}
+          files: app/build/outputs/apk/release/QuickTodo.apk
