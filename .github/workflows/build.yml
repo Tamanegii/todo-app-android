@@ -26,12 +26,22 @@ jobs:
       - name: Build Release APK
         run: ./gradlew assembleRelease
 
+      - name: Sign APK
+        run: |
+          keytool -genkeypair -v -keystore release.keystore \
+            -alias quicktodo -keyalg RSA -keysize 2048 -validity 10000 \
+            -storepass quicktodo123 -keypass quicktodo123 \
+            -dname "CN=QuickTodo, O=Tamanegi, L=CN"
+          apksigner sign --ks release.keystore \
+            --ks-key-alias quicktodo \
+            --ks-pass pass:quicktodo123 \
+            --key-pass pass:quicktodo123 \
+            --out app/build/outputs/apk/release/QuickTodo.apk \
+            app/build/outputs/apk/release/app-release-unsigned.apk
+
       - name: Get version
         id: version
         run: echo "tag=v1.0.$(date +%Y%m%d%H%M)" >> $GITHUB_OUTPUT
-
-      - name: Rename APK
-        run: mv app/build/outputs/apk/release/*.apk app/build/outputs/apk/release/QuickTodo.apk
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
