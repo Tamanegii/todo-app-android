@@ -1,5 +1,7 @@
 package com.tamanegi.todo
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,8 +16,16 @@ import java.io.IOException
 class MainActivity : AppCompatActivity() {
 
     private val client = OkHttpClient()
-    private val serverUrl = "http://todo.tamanegi.xyz/api/v1/messages"
-    private val authToken = BuildConfig.AUTH_TOKEN
+
+    private fun getServerUrl(): String {
+        val prefs = getSharedPreferences("todo_config", Context.MODE_PRIVATE)
+        return prefs.getString("server_url", "http://todo.tamanegi.xyz/api/v1/messages") ?: ""
+    }
+
+    private fun getAuthToken(): String {
+        val prefs = getSharedPreferences("todo_config", Context.MODE_PRIVATE)
+        return prefs.getString("auth_token", "") ?: ""
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +35,20 @@ class MainActivity : AppCompatActivity() {
         val contentInput = findViewById<TextInputEditText>(R.id.contentInput)
         val sendButton = findViewById<MaterialButton>(R.id.sendButton)
         val statusText = findViewById<TextView>(R.id.statusText)
+        val settingsButton = findViewById<MaterialButton>(R.id.settingsButton)
+
+        settingsButton.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
 
         sendButton.setOnClickListener {
+            val token = getAuthToken()
+            if (token.isEmpty()) {
+                statusText.setTextColor(0xFFe74c3c.toInt())
+                statusText.text = "请先在设置中配置密钥"
+                return@setOnClickListener
+            }
+
             val text = contentInput.text?.toString()?.trim() ?: ""
             if (text.isEmpty()) return@setOnClickListener
 
@@ -63,8 +85,8 @@ class MainActivity : AppCompatActivity() {
 
         val body = json.toString().toRequestBody("application/json".toMediaType())
         val request = Request.Builder()
-            .url(serverUrl)
-            .addHeader("Authorization", "Bearer $authToken")
+            .url(getServerUrl())
+            .addHeader("Authorization", "Bearer ${getAuthToken()}")
             .post(body)
             .build()
 
@@ -77,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                 if (response.code == 202 || response.isSuccessful) {
                     onSuccess()
                 } else if (response.code == 401) {
-                    onError("认证失败")
+                    onError("认证失败，请检查设置中的密钥")
                 } else {
                     onError("发送失败")
                 }

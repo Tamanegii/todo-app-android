@@ -13,8 +13,6 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
-        buildConfigField("String", "AUTH_TOKEN", "\"${project.findProperty("AUTH_TOKEN") ?: ""}\"")
     }
 
     buildTypes {
@@ -31,10 +29,6 @@ android {
 
     kotlinOptions {
         jvmTarget = "17"
-    }
-
-    buildFeatures {
-        buildConfig = true
     }
 }
 
