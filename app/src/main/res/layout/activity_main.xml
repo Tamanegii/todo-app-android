@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:boxBackgroundColor="#16213e"
         app:boxStrokeColor="#4a6fa5"
-        app:hintTextColor="#a0a0b0">
+        app:hintTextColor="#bbbbbb">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/projectInput"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:hint="项目名称（选填，不填进收件箱）"
             android:textColor="#eeeeee"
-            android:textColorHint="#666666"
+            android:textColorHint="#999999"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:boxBackgroundColor="#16213e"
         app:boxStrokeColor="#4a6fa5"
-        app:hintTextColor="#a0a0b0">
+        app:hintTextColor="#bbbbbb">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/contentInput"
@@ -69,7 +69,7 @@
             android:layout_height="120dp"
             android:hint="明天下午3点 开会 重要 1小时"
             android:textColor="#eeeeee"
-            android:textColorHint="#666666"
+            android:textColorHint="#999999"
             android:inputType="textMultiLine"
             android:gravity="top" />
     </com.google.android.material.textfield.TextInputLayout>

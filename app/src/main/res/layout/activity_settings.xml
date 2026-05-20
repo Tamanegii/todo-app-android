@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:boxBackgroundColor="#16213e"
         app:boxStrokeColor="#4a6fa5"
-        app:hintTextColor="#a0a0b0">
+        app:hintTextColor="#bbbbbb">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/serverUrlInput"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:hint="服务器地址"
             android:textColor="#eeeeee"
-            android:textColorHint="#666666"
+            android:textColorHint="#999999"
             android:inputType="textUri" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:hint="AUTH_TOKEN 密钥"
             android:textColor="#eeeeee"
-            android:textColorHint="#666666"
+            android:textColorHint="#999999"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
