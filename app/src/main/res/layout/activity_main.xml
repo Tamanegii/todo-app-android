@@ -37,17 +37,17 @@
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:boxBackgroundColor="#16213e"
-        app:boxStrokeColor="#4a6fa5"
-        app:hintTextColor="#bbbbbb">
+        app:boxBackgroundColor="#253550"
+        app:boxStrokeColor="#6688aa"
+        app:hintTextColor="#e0e0e0">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/projectInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="项目名称（选填，不填进收件箱）"
-            android:textColor="#eeeeee"
-            android:textColorHint="#999999"
+            android:textColor="#ffffff"
+            android:textColorHint="#e0e0e0"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,17 +59,17 @@
         app:layout_constraintTop_toBottomOf="@id/projectLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:boxBackgroundColor="#16213e"
-        app:boxStrokeColor="#4a6fa5"
-        app:hintTextColor="#bbbbbb">
+        app:boxBackgroundColor="#253550"
+        app:boxStrokeColor="#6688aa"
+        app:hintTextColor="#e0e0e0">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/contentInput"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:hint="明天下午3点 开会 重要 1小时"
-            android:textColor="#eeeeee"
-            android:textColorHint="#999999"
+            android:textColor="#ffffff"
+            android:textColorHint="#e0e0e0"
             android:inputType="textMultiLine"
             android:gravity="top" />
     </com.google.android.material.textfield.TextInputLayout>
